@@ -1,2 +1,2 @@
 # yamori
-A Salesforce console utility for Ruby programmers
+Saleforce sObject class library
