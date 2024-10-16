@@ -14,7 +14,7 @@ module Yamori
       end
 
       def describe
-        connection.describe(name.to_sym)
+        Schema.new(connection.describe(name.to_sym))
       end
     end
 

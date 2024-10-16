@@ -73,10 +73,6 @@ module Yamori
         [base, where, _order, limit].compact.join(' ')
       end
 
-      def to_csv
-        connection.query(to_soql, Object.const_get(object_name.to_sym), :csv)
-      end
-
       def all
         connection.query(to_soql, Object.const_get(object_name.to_sym))
       end

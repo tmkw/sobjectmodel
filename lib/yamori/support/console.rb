@@ -37,7 +37,7 @@ def connection
 end
 
 def target_org
-  current_org.target_org
+  current_org.alias
 end
 
 def current_org
