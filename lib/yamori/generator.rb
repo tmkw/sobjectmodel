@@ -13,6 +13,7 @@ module Yamori
     end
 
     def generate(*object_types)
+      generated_types = []
       object_types.each do |object_type|
         next if generated? object_type
 
@@ -22,7 +23,10 @@ module Yamori
         instance_eval "::#{object_type} = #{class_definition}"
         klass = Object.const_get object_type.to_sym
         klass.connection = connection
+        generated_types << object_type
       end
+
+      generated_types
     end
 
     private
