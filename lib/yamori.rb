@@ -15,6 +15,10 @@ module Yamori
     @connection
   end
 
+  def self.connection=(connector)
+    @connection = connector
+  end
+
   def self.generate(*sobject_types)
     generator = Generator.new(connection)
     generator.generate(*sobject_types)
