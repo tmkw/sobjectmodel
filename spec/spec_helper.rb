@@ -95,4 +95,9 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+  require 'byebug'
+
+  config.when_first_matching_example_defined(:webmock) do
+    require 'webmock/rspec'
+  end
 end

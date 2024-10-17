@@ -10,11 +10,7 @@ module Yamori
 
       def exec_query(soql, model_class: nil)
         result = client.query(soql)
-
-        result.records.each_with_object([]) do |h, a|
-          record = prepare_record(h)
-          a << (model_class ? model_class.new(**record) : record)
-        end
+        result.to_records(model_class: model_class)
       end
 
       def describe(object_type)
@@ -48,32 +44,6 @@ module Yamori
       end
 
       private
-
-      def prepare_record(hash)
-        hash.delete 'attributes'
-
-        hash.keys.each do |k|
-          if parent?(hash[k])
-            hash[k] = prepare_record(hash[k])
-          elsif children?(hash[k])
-            hash[k] = hash[k]['records'].map{|h| prepare_record(h)}
-          end
-        end
-
-        hash
-      end
-
-      def children?(h)
-        return false unless h.instance_of?(Hash)
-
-        h.has_key? 'records'
-      end
-
-      def parent?(h)
-        return false unless h.instance_of?(Hash)
-
-        h.has_key?('records') == false
-      end
 
       def client
         @client
