@@ -1,5 +1,5 @@
 require 'yamori/class_definition'
-require 'yamori/connection/rest'
+require 'yamori/adapter/rest'
 require_relative '../support/shared_examples/generator_examples'
 
 RSpec.describe 'Yamori::Generator' do
@@ -14,7 +14,7 @@ RSpec.describe 'Yamori::Generator' do
 
   describe '#generate' do
     it_should_behave_like 'Generator#generate' do
-      let(:connection) { instance_double('Yamori::Connection::Rest') }
+      let(:connection) { instance_double('Yamori::Adapter::Rest') }
     end
   end
 end

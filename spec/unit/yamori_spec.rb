@@ -5,14 +5,13 @@ RSpec.describe 'Yamori' do
   let(:host) { 'https://hoge.salesforce.example.com' }
   let(:token) { 'access token' }
   let(:api_ver) { 62.0 }
-  let(:rest_adapter) { instance_double('Yamori::Connection::Rest') }
+  let(:rest_client) { instance_double('Yamori::Rest::Client') }
+  let(:rest_adapter) { instance_double('Yamori::Adapter::Rest') }
 
   describe '.connect and .connection' do
     it 'connect the salesforce with Yamori through API connection' do
-      allow(Yamori::Connection::Rest)
-        .to receive(:new)
-        .with(instance_url: host, access_token: token, api_version: api_ver)
-        .and_return(rest_adapter)
+      allow(Yamori::Rest::Client).to receive(:new).with(instance_url: host, access_token: token, api_version: api_ver).and_return(rest_client)
+      allow(Yamori::Adapter::Rest).to receive(:new).with(rest_client).and_return(rest_adapter)
 
       Yamori.connect(api_type, instance_url: host, access_token: token, api_version: api_ver)
 
@@ -21,7 +20,7 @@ RSpec.describe 'Yamori' do
   end
 
   describe '.generate' do
-    let(:adapter) { instance_double('Yamori::Connection::Rest') }
+    let(:adapter) { instance_double('Yamori::Adapter::Rest') }
     let(:generator) { instance_double('Yamori::Generator') }
 
     before do

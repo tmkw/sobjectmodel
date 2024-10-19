@@ -95,4 +95,18 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+  require 'json'
+  require 'date'
+  require 'byebug'
+  require 'yamori/rest/http'
+  require 'yamori/rest/client'
+
+  config.when_first_matching_example_defined(:webmock) do
+    require 'webmock/rspec'
+  end
+
+  config.when_first_matching_example_defined(:rest_request) do
+    require_relative 'support/shared_context/rest/base_context'
+    config.include_context 'rest client base context', :rest_request, type: :unit
+  end
 end

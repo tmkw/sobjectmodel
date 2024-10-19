@@ -1,6 +1,9 @@
 require 'json'
 
 module Yamori
+  #
+  # sObject Schema
+  #
   class Schema
     def initialize(schema_hash)
       @schema = schema_hash

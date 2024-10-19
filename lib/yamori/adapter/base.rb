@@ -1,5 +1,5 @@
 module Yamori
-  module Connection
+  module Adapter
     class Base
       def exec_query(soql, model_class: nil)
         raise 'this method is not implemented'
