@@ -10,11 +10,17 @@ module AccountHelper
   end
 
   def account_id
+    Object.const_get(:Account)
     account.Id
+  rescue NameError => e
+    account['Id']
   end
 
   def account_name
+    Object.const_get(:Account)
     account.Name
+  rescue NameError => e
+    account['Name']
   end
 end
 

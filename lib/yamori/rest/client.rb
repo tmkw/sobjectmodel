@@ -19,10 +19,6 @@ module Yamori
         @http = Http.new(instance_url, access_token)
       end
 
-      def http
-        @http
-      end
-
       def query(soql)
         response = http.get "/services/data/v#{api_version}/query?q=#{CGI.escape(soql)}"
         QueryResult.new(response)
@@ -33,8 +29,9 @@ module Yamori
         JSON.parse(response)
       end
 
-      def find(object_type, id)
-        response = http.get "/services/data/v#{api_version}/sobjects/#{object_type}/#{id}"
+      def find(object_type, id, fields: [])
+        query = fields.empty? ? '' : %|?fields=#{fields.map(&:to_s).join(',')}|
+        response = http.get "/services/data/v#{api_version}/sobjects/#{object_type}/#{id}#{query}"
         JSON.parse(response)
       end
 
@@ -51,6 +48,12 @@ module Yamori
       def delete(object_type, id)
         http.delete "/services/data/v#{api_version}/sobjects/#{object_type}/#{id}/"
         id
+      end
+
+      private
+
+      def http
+        @http
       end
     end
   end

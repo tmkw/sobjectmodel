@@ -43,18 +43,18 @@ module Yamori
         response.code
       end
 
+      private
+
+      def headers
+        { 'Authorization' => ('Bearer %{token}' % {token: access_token}), 'Content-Type'  => 'application/json' }
+      end
+
       def post_request(path, data)
         url = URI.parse(instance_url + path)
         response = Net::HTTP.post(url, JSON.dump(data), headers)
         raise RequestError.new(response.code, response.message) if response.is_a?(Net::HTTPClientError) || response.is_a?(Net::HTTPServerError)
 
         response
-      end
-
-      private
-
-      def headers
-        { 'Authorization' => ('Bearer %{token}' % {token: access_token}), 'Content-Type'  => 'application/json' }
       end
     end
   end
