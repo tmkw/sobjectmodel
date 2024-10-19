@@ -1,0 +1,1 @@
+--output-dir docs lib/**/*.rb --main rdoc/README.rdoc - CHANGELOG.md LICENSE rdoc/*.rdoc rdoc/*.html

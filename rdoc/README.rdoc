@@ -1,0 +1,105 @@
+= Yamori
+Salesforce sObject class library
+
+== install
+Rubygem::
+  the easiest way
+    $ gem install yamori
+Bundler::
+  in Gemfile:
+    gem 'yamori'
+  then,
+    $ bundle install
+== Generate sObject classes
+  require 'yamori'
+
+  # connect with Salesforce using REST API
+  Yamori.connect(:rest, instance_url: url, access_token: token, api_version: 62.0)
+
+  # generate Account, Contact and User sObject class
+  Yamori.generate :Account, :Contact, :User
+
+=== What is instance url?
+In short, it's Salesforce host url.
+You can check it by Salesforce CLI:
+  $ sf org display
+  KEY              VALUE
+  --------------------------------------------------------------
+  Access Token     <the org's access token>
+  Api Version      62.0
+  Connected Status Connected
+  Instance Url     https://free27-dev-ed.develop.my.salesforce.com
+
+For details, see {https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_org_commands_unified.htm#cli_reference_org_display_unified the command reference}.
+== Main features
+Initialize and save a record
+  c = Contact.new(:Name => "John Smith")
+  c.Name # "John Smith"
+  c.save
+
+Find and update a record
+  c2 = Contact.find(c.id)                  # find by record ID
+  c2 = Contact.find_by(Name: "John Smith") # find by Name
+
+  c2.Name = "Johnny Smith"
+  c2.save # update
+
+Delete a record
+  c2 = Contact.find(c.id)
+  c2.delete
+
+Query and Get a record
+  contact = Contact.select(:Id, :Name).where(Name: 'Akin Kristen').take
+  contact # => #<Contact: @Id="0035j00001RW3xbAAD", @Name="Akin Kristen">
+  contact.Name # Akin Kristen
+
+  Contact.select(:Name).where(Name: 'John Smith', LastModifiedDate: :Yesterday).take
+  Contact.select(:Name).where(Name: 'John Smith').where(LastModifiedDate: :Yesterday).take # same as above
+
+Query and Get records
+  contacts = Contact.where(LastModifiedDate: :Yesterday).all     # get all contacts who are modified yesterday
+  accounts = Account.where.not(LastModifiedDate: :Yesterday).all # get all accounts that are *not* modified yesterday
+
+Aggregate functions
+  Account.where(BillingCountry: 'Japan').count      # count accounts whose billing country is Japan
+  User.where(country: 'USA').max(:LastModifiedDate) # get the latest LastModifiedDate of users in USA
+  Case.min(:LastCreatedDate)                        # get the date when the oldest case was created
+
+Child-Parent Relationship
+  contact = Contact.select(:Id, :Name, "Account.Name").where(Name: 'Akin Kristen').take
+  contact # <Contact: @Id="0035j00001RW3xbAAD", @Name="Akin Kristen", @Account= #<Account @Name="Aethna Home Products">>
+  contact.Account.Name # Aethna Home Products
+
+Parent-Children Relationship
+  account = Account.select(:Id, :Name, "(SELECT Name FROM Contacts)").take
+  account # <Account @Contacts=[#<Contact @Name="Akin Kristen">], @Id="0015j00001dsDuhAAE", @Name="Aethna Home Products">
+  account.Name                # Aethna Home Products
+  account.Contacts            # [#<Contact @Name="Akin Kristen">]
+  account.Contacts.first.Name # Akin Kristen
+
+Time keywords such as 'yesterday' and 'LAST_N_DAYS:N' with symbol style
+  Contact.select(:Name).where(LastModifiedDate: :Yesterday).take       # "SELECT Id, Name FROM Contact WHERE LastModifiedDate = Yesterday" LIMIT 1
+  Contact.select(:Name).where(LastModifiedDate: :"LAST_N_DAYS:5").take # "SELECT Id, Name FROM Contact WHERE LastModifiedDate = LAST_N_DAYS:5" LIMIT 1
+
+Array for 'IN' keyword
+  Contact.select(:Name).where(Name: ['Jonny Good', 'John Smith']).all # same as "SELECT Name FROM Contact WHERE Name IN ('Jonny Good', 'John Smith')"
+
+Using partial soql directly
+  Contact.select("Id, Name").where("LastModifiedDate = LAST_N_DAYS:5").all
+
+Ternary style
+  Contact.select(:Id, :Name).where(:LastModifiedDate, :>=, :"LAST_N_DAYS:5").all # SELECT Id, Name FROM Contact WHERE LastModifiedDate >= LAST_N_DAYS:5
+  Account.select(:Id, :Name).where(:Name, :LIKE, "%OIL%").all                    # SELECT Id, Name FROM Account WHERE Name LIKE '%OIL%'
+
+Get schema
+  schema = Account.describe
+  schema.name                   # Account
+  schema.field_names            # [Id, Name, ....]
+  schema.fields.name_and_labels # returns all field name and label pairs
+
+Sometimes it's better to use raw SOQL when it gets complecated.
+  accounts =
+    Yamori.connection.exec_query(
+      "SELECT Id, Name FROM Account WHERE Name like '%Hoge' OR (Age <= 30 AND BillingCity IN ['Tokyo', 'NewYork'])",
+      model_class: Account
+    )

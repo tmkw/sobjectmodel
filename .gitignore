@@ -1,0 +1,4 @@
+vendor
+*.swp
+.byebug_history
+.yardoc
