@@ -9,4 +9,5 @@ group :development do
   gem 'webmock'
   gem 'byebug'
   gem 'sf_cli'
+  gem 'yard'
 end

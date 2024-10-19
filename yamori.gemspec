@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "yamori"
-  s.version     = "0.1.0"
+  s.version     = "0.0.0"
   s.summary     = "Saleforce sObject class library"
   s.description = "Saleforce sObject class library"
   s.authors     = ["Takanobu Maekawa"]
