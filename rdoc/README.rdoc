@@ -28,7 +28,7 @@ You can check it by Salesforce CLI:
   Access Token     <the org's access token>
   Api Version      62.0
   Connected Status Connected
-  Instance Url     https://free27-dev-ed.develop.my.salesforce.com
+  Instance Url     https://hoge-abc-ed.example.my.salesforce.com
 
 For details, see {https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_org_commands_unified.htm#cli_reference_org_display_unified the command reference}.
 == Main features
