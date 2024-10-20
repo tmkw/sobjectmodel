@@ -21,6 +21,7 @@ module ConnectionHelper
   def target_org
     connection_config.alias
   end
+  alias org_alias target_org
 end
 
 World(ConnectionHelper)
