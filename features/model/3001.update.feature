@@ -1,10 +1,9 @@
 Feature: Update a record
 
-  Background:
-    Given "Account" class is already generated
-
-  Scenario: Update a record successfully
-    Given get a record
+  Scenario Outline: Update a record successfully
+    Given <connection type>
+    And "Account" class is already generated
+    And get a record
     """
     @an_account = Account.find account_id
     """
@@ -14,3 +13,8 @@ Feature: Update a record
     @an_account.save
     """
     Then the account is updated
+
+    Examples:
+      |connection type|
+      |rest           |
+      |CLI/sf         |

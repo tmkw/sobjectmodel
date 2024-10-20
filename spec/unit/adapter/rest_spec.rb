@@ -1,5 +1,3 @@
-require 'yamori/adapter/rest'
-
 RSpec.describe 'Yamori::Adapter::Rest' do
   let(:client) { instance_double('Yamori::Rest::Client') }
   let(:adapter) {Yamori::Adapter::Rest.new(client)}

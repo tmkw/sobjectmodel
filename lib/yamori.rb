@@ -1,5 +1,6 @@
 require 'yamori/rest/client'
 require 'yamori/adapter/rest'
+require 'yamori/adapter/sf'
 require 'yamori/generator'
 
 module Yamori
@@ -8,6 +9,8 @@ module Yamori
                   when 'REST'
                     client = Rest::Client.new(**options)
                     Adapter::Rest.new(client)
+                  when 'CLI/SF'
+                    Adapter::Sf.new(sf, **options)
                   end
   end
 
