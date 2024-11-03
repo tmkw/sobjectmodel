@@ -62,7 +62,7 @@ module Yamori
             if current_attributes[:#{name}] == original_attributes[:#{name}]
               updated_attributes[:#{name}] = nil
             else
-              updated_attributes[:#{name}] = value
+              updated_attributes[:#{name}] = (value.nil? ? :null : value)
             end
           end
         EOS

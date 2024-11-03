@@ -86,15 +86,56 @@ RSpec.describe 'Yamori::ClassDefinition' do
       end
     end
 
+    describe 'current_attributes' do
+      it 'keeps the current attribute values' do
+        obj = ClassDefininitionTest1.new
+        expect(obj.current_attributes[:Name]).to be nil
+
+        obj.Name = 'Hoge Fuga'
+        expect(obj.current_attributes[:Name]).to eq 'Hoge Fuga'
+      end
+    end
+
+    describe 'original_attributes' do
+      it 'keeps the original attribute values' do
+        obj = ClassDefininitionTest1.new
+        expect(obj.original_attributes[:Name]).to be nil
+
+        obj.Name = 'Hoge Fuga'
+        expect(obj.original_attributes[:Name]).to be nil
+      end
+    end
+
+    describe 'updated_attributes' do
+      let(:obj) { ClassDefininitionTest1.new(Name: 'Hoge Fuga') }
+
+      it 'keeps only updated attributes' do
+        expect(obj.updated_attributes[:Name]).to be nil
+
+        obj.Name = 'Baz Bar'
+        expect(obj.updated_attributes[:Name]).to eq 'Baz Bar'
+
+        obj.Name = 'Hoge Fuga'
+        expect(obj.updated_attributes[:Name]).to be nil
+      end
+
+      context 'in case of updating with nil' do
+        it 'set nil as :null' do
+          obj.Name = nil
+          expect(obj.updated_attributes[:Name]).to eq :null
+        end
+      end
+    end
+
     describe 'DML methods' do
       it_should_behave_like 'defining model DML methods' do
-        let(:connection) { instance_double('Yamori::Connection::Rest') }
+        let(:connection) { instance_double('Yamori::Adapter::Rest') }
       end
     end
 
     describe 'Query methods' do
       it_should_behave_like 'defining model Query methods' do 
-        let(:connection) { instance_double('Yamori::Connection::Rest') }
+        let(:connection) { instance_double('Yamori::Adapter::Rest') }
       end
     end
   end
