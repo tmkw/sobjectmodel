@@ -2,3 +2,4 @@ vendor
 *.swp
 .byebug_history
 .yardoc
+*.gem
