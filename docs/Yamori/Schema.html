@@ -116,7 +116,7 @@
     
   
     
-      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Schema/Field.html" title="Yamori::Schema::Field (class)">Field</a></span>, <span class='object_link'><a href="Schema/Fields.html" title="Yamori::Schema::Fields (class)">Fields</a></span>, <span class='object_link'><a href="Schema/Relation.html" title="Yamori::Schema::Relation (class)">Relation</a></span>, <span class='object_link'><a href="Schema/Relations.html" title="Yamori::Schema::Relations (class)">Relations</a></span>
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Schema/Field.html" title="Yamori::Schema::Field (class)">Field</a></span>, <span class='object_link'><a href="Schema/Fields.html" title="Yamori::Schema::Fields (class)">Fields</a></span>, <span class='object_link'><a href="Schema/RecordType.html" title="Yamori::Schema::RecordType (class)">RecordType</a></span>, <span class='object_link'><a href="Schema/Relation.html" title="Yamori::Schema::Relation (class)">Relation</a></span>, <span class='object_link'><a href="Schema/Relations.html" title="Yamori::Schema::Relations (class)">Relations</a></span>
     
   
 </p>
@@ -2324,7 +2324,7 @@
       <pre class="code"><span class="info file"># File 'lib/yamori/schema.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_label'>label</span>
-  <span class='id identifier rubyid_schema'>schema</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>label</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
+  <span class='ivar'>@label</span> <span class='op'>=</span> <span class='id identifier rubyid_schema'>schema</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>label</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2600,7 +2600,7 @@
       <pre class="code"><span class="info file"># File 'lib/yamori/schema.rb', line 12</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_name'>name</span>
-  <span class='id identifier rubyid_schema'>schema</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
+  <span class='ivar'>@name</span> <span class='op'>=</span> <span class='id identifier rubyid_schema'>schema</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2774,7 +2774,7 @@
       <pre class="code"><span class="info file"># File 'lib/yamori/schema.rb', line 174</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_record_types'>record_types</span>
-  <span class='id identifier rubyid_schema'>schema</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>recordTypeInfos</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='ivar'>@record_types</span> <span class='op'>=</span> <span class='id identifier rubyid_schema'>schema</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>recordTypeInfos</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_rt'>rt</span><span class='op'>|</span> <span class='const'><span class='object_link'><a href="Schema/RecordType.html" title="Yamori::Schema::RecordType (class)">RecordType</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="Yamori::Schema#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_rt'>rt</span><span class='rparen'>)</span><span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -3382,7 +3382,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Oct 20 14:51:36 2024 by
+  Generated on Mon Nov  4 00:30:40 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.3.4).
 </div>

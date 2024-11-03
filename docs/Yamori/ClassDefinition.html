@@ -549,7 +549,7 @@
 </span><span class='tstring_content'>        if current_attributes[:</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>] == original_attributes[:</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>]
 </span><span class='tstring_content'>          updated_attributes[:</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>] = nil
 </span><span class='tstring_content'>        else
-</span><span class='tstring_content'>          updated_attributes[:</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>] = value
+</span><span class='tstring_content'>          updated_attributes[:</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>] = (value.nil? ? :null : value)
 </span><span class='tstring_content'>        end
 </span><span class='tstring_content'>      end
 </span><span class='heredoc_end'>    EOS
@@ -673,7 +673,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Oct 20 14:51:37 2024 by
+  Generated on Mon Nov  4 00:30:40 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.3.4).
 </div>
