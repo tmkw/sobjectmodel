@@ -5,7 +5,7 @@ RSpec.describe 'Yamori::QueryMethods::QueryCondition' do
   QueryContditionTestClass = Struct.new(:a, :b)
 
   let(:klass) { QueryContditionTestClass }
-  let(:field_names) { [:a, :b] }
+  let(:field_names) { [:Id, :a, :b] }
   let(:connection) { double('Some kind of Connection') }
   let(:query_condition) { Yamori::QueryMethods::QueryCondition.new(connection, klass.name, field_names) }
 
@@ -219,7 +219,19 @@ RSpec.describe 'Yamori::QueryMethods::QueryCondition' do
 
     context 'with no where condtions' do
       it 'constructs a minimum soql' do
-        expect(query_condition.to_soql).to eq "SELECT a, b FROM QueryContditionTestClass"
+        expect(query_condition.select(:a, :b, :Id).to_soql).to eq "SELECT a, b, Id FROM QueryContditionTestClass"
+      end
+    end
+
+    context 'when there is no select clause' do
+      it 'adds all fields in select clause' do
+        expect(query_condition.to_soql).to eq "SELECT Id, a, b FROM QueryContditionTestClass"
+      end
+    end
+
+    context "when there isn't Id in select clause" do
+      it 'adds Id fiel automatically' do
+        expect(query_condition.select(:b).to_soql).to eq "SELECT b, Id FROM QueryContditionTestClass"
       end
     end
   end

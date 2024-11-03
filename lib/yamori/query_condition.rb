@@ -57,10 +57,10 @@ module Yamori
         return self
       end
 
-      def order(*fields)
-        return self if fields&.empty?
+      def order(*_fields)
+        return self if _fields&.empty?
 
-        @row_order = fields
+        @row_order = _fields
         return self
       end
 
@@ -107,7 +107,7 @@ module Yamori
         return "MAX(#{max_select_field})" if max_select_field
         return "MIN(#{min_select_field})" if min_select_field
 
-        (fields.empty? ? all_field_names : fields).join(', ')
+        (fields.empty? ? all_field_names : fields.push(:Id).uniq).join(', ')
       end 
 
       def to_string_expr(expr)
