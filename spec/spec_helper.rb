@@ -100,6 +100,8 @@ RSpec.configure do |config|
   require 'byebug'
   require 'yamori/rest/http'
   require 'yamori/rest/client'
+  require 'yamori/adapter/rest'
+  require 'yamori/adapter/sf'
 
   config.when_first_matching_example_defined(:webmock) do
     require 'webmock/rspec'

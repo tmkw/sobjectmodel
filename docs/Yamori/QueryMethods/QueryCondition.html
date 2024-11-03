@@ -570,7 +570,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#order-instance_method" title="#order (instance method)">#<strong>order</strong>(*fields)  &#x21d2; Object </a>
+      <a href="#order-instance_method" title="#order (instance method)">#<strong>order</strong>(*_fields)  &#x21d2; Object </a>
     
 
     
@@ -1403,7 +1403,7 @@
       <div class="method_details ">
   <h3 class="signature " id="order-instance_method">
   
-    #<strong>order</strong>(*fields)  &#x21d2; <tt>Object</tt> 
+    #<strong>order</strong>(*_fields)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -1425,10 +1425,10 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/yamori/query_condition.rb', line 60</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_order'>order</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_fields'>fields</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='kw'>self</span> <span class='kw'>if</span> <span class='id identifier rubyid_fields'>fields</span><span class='op'>&amp;.</span><span class='id identifier rubyid_empty?'>empty?</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_order'>order</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid__fields'>_fields</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>self</span> <span class='kw'>if</span> <span class='id identifier rubyid__fields'>_fields</span><span class='op'>&amp;.</span><span class='id identifier rubyid_empty?'>empty?</span>
 
-  <span class='ivar'>@row_order</span> <span class='op'>=</span> <span class='id identifier rubyid_fields'>fields</span>
+  <span class='ivar'>@row_order</span> <span class='op'>=</span> <span class='id identifier rubyid__fields'>_fields</span>
   <span class='kw'>return</span> <span class='kw'>self</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1621,7 +1621,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Oct 20 14:51:37 2024 by
+  Generated on Mon Nov  4 00:30:40 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.3.4).
 </div>

@@ -8,7 +8,12 @@ module Yamori
       if new_record?
         self.Id = self.class.connection.create(self.class.name.to_sym, current_attributes.reject{|_,v| v.nil?})
       else
-        self.class.connection.update(self.class.name.to_sym, self.Id, updated_attributes.reject{|_,v| v.nil?})
+        _updated_attributes =
+          updated_attributes
+            .reject{|_,v| v.nil?}
+            .each_with_object({}){ |(k,v),h| h[k] = (v == :null) ? nil : v }
+
+        self.class.connection.update(self.class.name.to_sym, self.Id, _updated_attributes)
       end
 
       @original_attributes = current_attributes.dup

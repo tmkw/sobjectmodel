@@ -10,11 +10,11 @@ module Yamori
     end
 
     def name
-      schema['name']
+      @name = schema['name']
     end
 
     def label
-      schema['label']
+      @label = schema['label']
     end
 
     def fields
@@ -172,7 +172,7 @@ module Yamori
     end
 
     def record_types
-      schema["recordTypeInfos"]
+      @record_types = schema["recordTypeInfos"].map{|rt| RecordType.new(**rt)}
     end
 
     def replicateable?
@@ -222,6 +222,7 @@ module Yamori
     end
 
     Relation = Struct.new(:name, :field, :class_name)
+    RecordType = Struct.new(:active, :available, :defaultRecordTypeMapping, :developerName, :master, :name, :recordTypeId, :urls)
 
     class Relations
       include Enumerable

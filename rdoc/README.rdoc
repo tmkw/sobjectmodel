@@ -1,6 +1,8 @@
 = Yamori
 Salesforce sObject class library
 
+https://badge.fury.io/rb/yamori.svg
+
 == install
 Rubygem::
   the easiest way
