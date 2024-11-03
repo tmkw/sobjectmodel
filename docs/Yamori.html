@@ -79,7 +79,7 @@
   <dl>
     <dt>Defined in:</dt>
     <dd>lib/yamori.rb<span class="defines">,<br />
-  lib/yamori/schema.rb,<br /> lib/yamori/generator.rb,<br /> lib/yamori/rest/http.rb,<br /> lib/yamori/dml_methods.rb,<br /> lib/yamori/rest/client.rb,<br /> lib/yamori/rest/errors.rb,<br /> lib/yamori/adapter/base.rb,<br /> lib/yamori/adapter/rest.rb,<br /> lib/yamori/base_methods.rb,<br /> lib/yamori/query_methods.rb,<br /> lib/yamori/query_condition.rb,<br /> lib/yamori/class_definition.rb,<br /> lib/yamori/rest/query_result.rb</span>
+  lib/yamori/schema.rb,<br /> lib/yamori/generator.rb,<br /> lib/yamori/rest/http.rb,<br /> lib/yamori/adapter/sf.rb,<br /> lib/yamori/dml_methods.rb,<br /> lib/yamori/rest/client.rb,<br /> lib/yamori/rest/errors.rb,<br /> lib/yamori/adapter/base.rb,<br /> lib/yamori/adapter/rest.rb,<br /> lib/yamori/base_methods.rb,<br /> lib/yamori/query_methods.rb,<br /> lib/yamori/query_condition.rb,<br /> lib/yamori/class_definition.rb,<br /> lib/yamori/rest/query_result.rb</span>
 </dd>
   </dl>
   
@@ -224,22 +224,26 @@
       <pre class="lines">
 
 
-6
 7
 8
 9
 10
 11
-12</pre>
+12
+13
+14
+15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yamori.rb', line 6</span>
+      <pre class="code"><span class="info file"># File 'lib/yamori.rb', line 7</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_connect'>connect</span><span class='lparen'>(</span><span class='id identifier rubyid_api_type'>api_type</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='ivar'>@connection</span> <span class='op'>=</span> <span class='kw'>case</span> <span class='id identifier rubyid_api_type'>api_type</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_upcase'>upcase</span>
                 <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>REST</span><span class='tstring_end'>&#39;</span></span>
                   <span class='id identifier rubyid_client'>client</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Yamori/Rest.html" title="Yamori::Rest (module)">Rest</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Yamori/Rest/Client.html" title="Yamori::Rest::Client (class)">Client</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Yamori/Rest/Client.html#initialize-instance_method" title="Yamori::Rest::Client#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
                   <span class='const'><span class='object_link'><a href="Yamori/Adapter.html" title="Yamori::Adapter (module)">Adapter</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Yamori/Adapter/Rest.html" title="Yamori::Adapter::Rest (class)">Rest</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Yamori/Adapter/Rest.html#initialize-instance_method" title="Yamori::Adapter::Rest#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_client'>client</span><span class='rparen'>)</span>
+                <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>CLI/SF</span><span class='tstring_end'>&#39;</span></span>
+                  <span class='const'><span class='object_link'><a href="Yamori/Adapter.html" title="Yamori::Adapter (module)">Adapter</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Yamori/Adapter/Sf.html" title="Yamori::Adapter::Sf (class)">Sf</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Yamori/Adapter/Sf.html#initialize-instance_method" title="Yamori::Adapter::Sf#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_sf'>sf</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
                 <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -262,12 +266,12 @@
       <pre class="lines">
 
 
-14
-15
-16</pre>
+17
+18
+19</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yamori.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/yamori.rb', line 17</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_connection'><span class='object_link'><a href="top-level-namespace.html#connection-instance_method" title="#connection (method)">connection</a></span></span>
   <span class='ivar'>@connection</span>
@@ -292,12 +296,12 @@
       <pre class="lines">
 
 
-18
-19
-20</pre>
+21
+22
+23</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yamori.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/yamori.rb', line 21</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_connection='>connection=</span><span class='lparen'>(</span><span class='id identifier rubyid_connector'>connector</span><span class='rparen'>)</span>
   <span class='ivar'>@connection</span> <span class='op'>=</span> <span class='id identifier rubyid_connector'>connector</span>
@@ -322,13 +326,13 @@
       <pre class="lines">
 
 
-22
-23
-24
-25</pre>
+25
+26
+27
+28</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yamori.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'lib/yamori.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_generate'><span class='object_link'><a href="top-level-namespace.html#generate-instance_method" title="#generate (method)">generate</a></span></span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_sobject_types'>sobject_types</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_generator'>generator</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Yamori/Generator.html" title="Yamori::Generator (class)">Generator</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Yamori/Generator.html#initialize-instance_method" title="Yamori::Generator#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_connection'><span class='object_link'><a href="top-level-namespace.html#connection-instance_method" title="#connection (method)">connection</a></span></span><span class='rparen'>)</span>
@@ -344,7 +348,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Oct 20 14:51:36 2024 by
+  Generated on Mon Nov  4 00:30:40 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.3.4).
 </div>
