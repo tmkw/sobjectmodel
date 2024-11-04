@@ -39,6 +39,9 @@ irb(main):017> acc
 irb(main):018> acc.Contacts.first.save #=> this does NEW RECORD INSERT, not Update because its Id is nil
  ```
 
+## 0.1.3 - 2024-11-04
+- New: now rest client supports [describe global](https://developer.salesforce.com/docs/atlas.ja-jp.api_rest.meta/api_rest/resources_describeGlobal.htm)
+
 ## 0.1.2 - 2024-11-04
 - CHANGE: Yamori changes the name to SObjectModel
 
