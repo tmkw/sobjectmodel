@@ -211,10 +211,54 @@ Instance Url     https://hoge-abc-ed.example.my.salesforce.com
     <span class='label'>model_class:</span> <span class='const'>Account</span>
   <span class='rparen'>)</span>
 </code></pre>
+
+<h2 id="label-Known+Issues">Known Issues</h2>
+
+<h3 id="label-exec_query">exec_query</h3>
+
+<p>SELECT clause missing Id causes model class to force insert a record, not update</p>
+
+<pre class="code ruby"><code class="ruby">irb(main):006&gt; rows = SObjectModel.connection.exec_query &quot;SELECT Name FROM Account LIMIT 1&quot;, model_class: Account
+=&gt;
+[#&lt;Account:0x0000724bada70970
+...
+irb(main):007&gt; rows.first
+=&gt;
+#&lt;Account:0x0000724bada70970
+  @Name=&quot;Express Logistics and Transport2&quot;,
+  @current_attributes={:Name=&gt;&quot;Express Logistics and Transport2&quot;},
+  @original_attributes={:Name=&gt;&quot;Express Logistics and Transport2&quot;},
+  @updated_attributes={:Name=&gt;nil}&gt;
+
+ =&gt; rows.first.save  #=&gt; this does NEW RECORD INSERT, not Update because its Id is nil
+</code></pre>
+
+<h3 id="label-Child+relationship+in+SELECT+clause">Child relationship in SELECT clause</h3>
+
+<p>child relationsip that doesn’t specify Id  in SELECT clause causes model class to force insert a record, not update</p>
+
+<pre class="code ruby"><code class="ruby">irb(main):016&gt; acc = Account.select(:Name, &#39;(SELECT Name FROM Contacts)&#39;).where(Id: Contact.where.not(AccountId: nil).pluck(:AccountId)).take
+=&gt;
+#&lt;Account:0x0000724bae18f4b8
+...
+irb(main):017&gt; acc
+=&gt;
+#&lt;Account:0x0000724bae18f4b8
+ @Contacts=
+  [#&lt;Contact:0x0000724bacf411a8 @Name=&quot;Gonzalez Rose&quot;, @current_attributes={:Name=&gt;&quot;Gonzalez Rose&quot;}, @original_attributes={:Name=&gt;&quot;Gonzalez Rose&quot;}, @updated_attributes={:Name=&gt;nil}&gt;,
+   #&lt;Contact:0x0000724bae18f468 @Name=&quot;Forbes Sean&quot;, @current_attributes={:Name=&gt;&quot;Forbes Sean&quot;}, @original_attributes={:Name=&gt;&quot;Forbes Sean&quot;}, @updated_attributes={:Name=&gt;nil}&gt;],
+ @Id=&quot;0015j00001U2XvEAAV&quot;,
+ @Name=&quot;Edge Communications&quot;,
+ @current_attributes={:Name=&gt;&quot;Edge Communications&quot;},
+ @original_attributes={:Name=&gt;&quot;Edge Communications&quot;, :Id=&gt;&quot;0015j00001U2XvEAAV&quot;},
+ @updated_attributes={:Name=&gt;nil}&gt;
+
+irb(main):018&gt; acc.Contacts.first.save #=&gt; this does NEW RECORD INSERT, not Update because its Id is nil
+</code></pre>
 </div></div>
 
       <div id="footer">
-  Generated on Mon Nov  4 11:27:33 2024 by
+  Generated on Mon Nov  4 13:39:54 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.3.4).
 </div>
