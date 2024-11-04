@@ -29,6 +29,11 @@ module SObjectModel
         JSON.parse(response)
       end
 
+      def describe_global
+        response = http.get "/services/data/v#{api_version}/sobjects/"
+        JSON.parse(response)
+      end
+
       def find(object_type, id, fields: [])
         query = fields.empty? ? '' : %|?fields=#{fields.map(&:to_s).join(',')}|
         response = http.get "/services/data/v#{api_version}/sobjects/#{object_type}/#{id}#{query}"
