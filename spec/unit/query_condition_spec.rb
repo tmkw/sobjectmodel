@@ -1,41 +1,41 @@
-require 'yamori/query_condition'
+require 'sobject_model/query_condition'
 require_relative '../support/shared_examples/query_condition_examples'
 
-RSpec.describe 'Yamori::QueryMethods::QueryCondition' do
+RSpec.describe 'SObjectModel::QueryMethods::QueryCondition' do
   QueryContditionTestClass = Struct.new(:a, :b)
 
   let(:klass) { QueryContditionTestClass }
   let(:field_names) { [:Id, :a, :b] }
   let(:connection) { double('Some kind of Connection') }
-  let(:query_condition) { Yamori::QueryMethods::QueryCondition.new(connection, klass.name, field_names) }
+  let(:query_condition) { SObjectModel::QueryMethods::QueryCondition.new(connection, klass.name, field_names) }
 
   describe '#all' do
     it_should_behave_like 'QueryCondition#all' do
-      let(:connection) { instance_double('Yamori::SfCommandConnection') }
+      let(:connection) { instance_double('SObjectModel::SfCommandConnection') }
     end
   end
 
   describe '#pluck' do
     it_should_behave_like 'QueryCondition#pluck' do
-      let(:connection) { instance_double('Yamori::SfCommandConnection') }
+      let(:connection) { instance_double('SObjectModel::SfCommandConnection') }
     end
   end
 
   describe '#count' do
     it_should_behave_like 'QueryCondition#count' do
-      let(:connection) { instance_double('Yamori::SfCommandConnection') }
+      let(:connection) { instance_double('SObjectModel::SfCommandConnection') }
     end
   end
 
   describe '#min' do
     it_should_behave_like 'QueryCondition#min' do
-      let(:connection) { instance_double('Yamori::SfCommandConnection') }
+      let(:connection) { instance_double('SObjectModel::SfCommandConnection') }
     end
   end
 
   describe '#max' do
     it_should_behave_like 'QueryCondition#max' do
-      let(:connection) { instance_double('Yamori::SfCommandConnection') }
+      let(:connection) { instance_double('SObjectModel::SfCommandConnection') }
     end
   end
 

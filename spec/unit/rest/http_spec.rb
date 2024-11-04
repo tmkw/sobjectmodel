@@ -1,4 +1,4 @@
-module Yamori::Rest
+module SObjectModel::Rest
   RSpec.describe Http do
     let(:http) { Http.new('https://hoge.example.com', 'access token') }
     let(:path) { '/path/to/resource/' }

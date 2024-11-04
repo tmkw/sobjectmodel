@@ -1,4 +1,4 @@
-module Yamori::Rest
+module SObjectModel::Rest
   RSpec.describe QueryResult do
     let(:raw_record) { single_sobject_hash }
     let(:prepared_record) { single_sobject_hash_without_attributes }

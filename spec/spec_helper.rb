@@ -98,10 +98,10 @@ RSpec.configure do |config|
   require 'json'
   require 'date'
   require 'byebug'
-  require 'yamori/rest/http'
-  require 'yamori/rest/client'
-  require 'yamori/adapter/rest'
-  require 'yamori/adapter/sf'
+  require 'sobject_model/rest/http'
+  require 'sobject_model/rest/client'
+  require 'sobject_model/adapter/rest'
+  require 'sobject_model/adapter/sf'
 
   config.when_first_matching_example_defined(:webmock) do
     require 'webmock/rspec'

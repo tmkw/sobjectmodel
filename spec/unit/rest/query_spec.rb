@@ -1,4 +1,4 @@
-module Yamori::Rest
+module SObjectModel::Rest
   RSpec.describe Client, :rest_request, type: :unit do
     describe '#query' do
       let(:path) { "/services/data/v#{api_ver}/query?q=SELECT+Id%2C+Name+FROM+Contact" } # exactly saying, this is path + query

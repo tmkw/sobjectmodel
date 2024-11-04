@@ -1,5 +1,5 @@
 RSpec.shared_examples 'QueryCondition#all' do
-  let(:query_condition) { Yamori::QueryMethods::QueryCondition.new(connection, klass.name, field_names) }
+  let(:query_condition) { SObjectModel::QueryMethods::QueryCondition.new(connection, klass.name, field_names) }
   let(:soql) { "SELECT Id, Name FROM Object" }
   let(:result) { [anything, anything] }
 
@@ -17,7 +17,7 @@ RSpec.shared_examples 'QueryCondition#all' do
 end
 
 RSpec.shared_examples 'QueryCondition#pluck' do
-  let(:query_condition) { Yamori::QueryMethods::QueryCondition.new(connection, klass.name, field_names) }
+  let(:query_condition) { SObjectModel::QueryMethods::QueryCondition.new(connection, klass.name, field_names) }
   let(:soql) { "SELECT Id, Name FROM Object" }
   let(:rows) { [{'a' => 'abc', 'b' => 'def'}, {'a' => 'uvw', 'b' => 'xyz'}] }
   let(:result) { ['abc', 'uvw'] }
@@ -36,7 +36,7 @@ RSpec.shared_examples 'QueryCondition#pluck' do
 end
 
 RSpec.shared_examples 'QueryCondition#count' do
-  let(:query_condition) { Yamori::QueryMethods::QueryCondition.new(connection, klass.name, field_names) }
+  let(:query_condition) { SObjectModel::QueryMethods::QueryCondition.new(connection, klass.name, field_names) }
   let(:soql) { "SELECT COUNT(Id) FROM #{klass.name}" }
   let(:rows) { [{'expr0' => 3}] }
   let(:result) { 3 }
@@ -52,7 +52,7 @@ RSpec.shared_examples 'QueryCondition#count' do
 end
 
 RSpec.shared_examples 'QueryCondition#min' do
-  let(:query_condition) { Yamori::QueryMethods::QueryCondition.new(connection, klass.name, field_names) }
+  let(:query_condition) { SObjectModel::QueryMethods::QueryCondition.new(connection, klass.name, field_names) }
   let(:soql) { "SELECT MIN(LastModifiedDate) FROM #{klass.name}" }
   let(:rows) { [{'expr0' => '2024-09-24T13:46:00.000+0000'}] }
   let(:result) { '2024-09-24T13:46:00.000+0000' }
@@ -68,7 +68,7 @@ RSpec.shared_examples 'QueryCondition#min' do
 end
 
 RSpec.shared_examples 'QueryCondition#max' do
-  let(:query_condition) { Yamori::QueryMethods::QueryCondition.new(connection, klass.name, field_names) }
+  let(:query_condition) { SObjectModel::QueryMethods::QueryCondition.new(connection, klass.name, field_names) }
   let(:soql) { "SELECT MAX(LastModifiedDate) FROM #{klass.name}" }
   let(:rows) { [{'expr0' => '2024-09-24T13:46:00.000+0000'}] }
   let(:result) { '2024-09-24T13:46:00.000+0000' }

@@ -2,7 +2,7 @@ module ContactHelper
   def contact
     return @contact unless @contact.nil?
 
-    name = 'yamori:test contact'
+    name = 'sobject_model:test contact'
     if record_exist?(:Contact, Name: name)
       sf.data.delete_record :Contact, where: {Name: name}, target_org: target_org
     end

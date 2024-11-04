@@ -1,4 +1,4 @@
-require 'yamori'
+require 'sobject_model'
 require 'sf_cli'
 require 'byebug'
 

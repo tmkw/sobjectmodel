@@ -1,4 +1,5 @@
-# yamori
+# sobjectmodel
+
 Saleforce sObject class library
 
-[tmkw.github.io/yamori](https://tmkw.github.io/yamori/)
+[tmkw.github.io/sobjectmodel](https://tmkw.github.io/sobjectmodel/)

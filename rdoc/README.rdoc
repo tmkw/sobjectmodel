@@ -1,25 +1,25 @@
-= Yamori
+= SObjectModel
 Salesforce sObject class library
 
-https://badge.fury.io/rb/yamori.svg
+https://badge.fury.io/rb/sobjectmodel.png
 
 == install
 Rubygem::
   the easiest way
-    $ gem install yamori
+    $ gem install sobjectmodel
 Bundler::
   in Gemfile:
-    gem 'yamori'
+    gem 'sobjectmodel'
   then,
     $ bundle install
 == Generate sObject classes
-  require 'yamori'
+  require 'sobject_model'
 
   # connect with Salesforce using REST API
-  Yamori.connect(:rest, instance_url: url, access_token: token, api_version: 62.0)
+  SObjectModel.connect(:rest, instance_url: url, access_token: token, api_version: 62.0)
 
   # generate Account, Contact and User sObject class
-  Yamori.generate :Account, :Contact, :User
+  SObjectModel.generate :Account, :Contact, :User
 
 === What is instance url?
 In short, it's Salesforce host url.
@@ -101,7 +101,7 @@ Get schema
 
 Sometimes it's better to use raw SOQL when it gets complecated.
   accounts =
-    Yamori.connection.exec_query(
+    SObjectModel.connection.exec_query(
       "SELECT Id, Name FROM Account WHERE Name like '%Hoge' OR (Age <= 30 AND BillingCity IN ['Tokyo', 'NewYork'])",
       model_class: Account
     )

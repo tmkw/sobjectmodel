@@ -1,6 +1,6 @@
 require 'json'
 
-module Yamori::Rest
+module SObjectModel::Rest
   RSpec.describe Http, :webmock do
     let(:instance_url) { 'https://example.com' }
     let(:access_token) { 'access token' }
