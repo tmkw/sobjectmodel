@@ -3,18 +3,31 @@ require 'sobject_model'
 
 def use(target_org)
   config = sf.org.display target_org: target_org
-  SObjectModel.connect(
-    :rest,
-    instance_url: config.instance_url,
-    access_token: config.access_token,
-    api_version:  config.api_version
-  )
+
+  @rest_client =
+    SObjectModel::Rest::Client.new(
+      instance_url: config.instance_url,
+      access_token: config.access_token,
+      api_version:  config.api_version
+    )
+
+  adapter = SObjectModel::Adapter::Rest.new(@rest_client)
+
+  SObjectModel.connection = adapter
+
+  #SObjectModel.connect(
+  #  :rest,
+  #  instance_url: config.instance_url,
+  #  access_token: config.access_token,
+  #  api_version:  config.api_version
+  #)
+
   unless config.connected?
     sf.org.login_web target_org: target_org, instance_url: config.instance_url
   end
 
   available_models.each do |model|
-    Object.const_get(model).connection = conn
+    Object.const_get(model).connection = SObjectModel.connection
   end
 
   @current_org = config
@@ -42,6 +55,10 @@ end
 
 def current_org
   @current_org
+end
+
+def rest_client
+  @rest_client
 end
 
 def query(_soql)
