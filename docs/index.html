@@ -58,24 +58,24 @@
       </div>
 
       <div id="content"><div id='filecontents'>
-<h1 id="label-Yamori">Yamori</h1>
+<h1 id="label-SObjectModel">SObjectModel</h1>
 
 <p>Salesforce sObject class library</p>
 
-<p><a href="https://badge.fury.io/rb/yamori.svg">badge.fury.io/rb/yamori.svg</a></p>
+<p><img src="https://badge.fury.io/rb/sobjectmodel.png" /></p>
 
 <h2 id="label-install">install</h2>
 <dl class="rdoc-list note-list"><dt>Rubygem
 <dd>
 <p>the easiest way</p>
 
-<pre class="code ruby"><code class="ruby">$ gem install yamori
+<pre class="code ruby"><code class="ruby">$ gem install sobjectmodel
 </code></pre>
 </dd><dt>Bundler
 <dd>
 <p>in Gemfile:</p>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>yamori</span><span class='tstring_end'>&#39;</span></span>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>sobjectmodel</span><span class='tstring_end'>&#39;</span></span>
 </code></pre>
 
 <p>then,</p>
@@ -86,13 +86,13 @@
 
 <h2 id="label-Generate+sObject+classes">Generate sObject classes</h2>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>yamori</span><span class='tstring_end'>&#39;</span></span>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>sobject_model</span><span class='tstring_end'>&#39;</span></span>
 
 <span class='comment'># connect with Salesforce using REST API
-</span><span class='const'><span class='object_link'><a href="Yamori.html" title="Yamori (module)">Yamori</a></span></span><span class='period'>.</span><span class='id identifier rubyid_connect'><span class='object_link'><a href="Yamori.html#connect-class_method" title="Yamori.connect (method)">connect</a></span></span><span class='lparen'>(</span><span class='symbol'>:rest</span><span class='comma'>,</span> <span class='label'>instance_url:</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='label'>access_token:</span> <span class='id identifier rubyid_token'>token</span><span class='comma'>,</span> <span class='label'>api_version:</span> <span class='float'>62.0</span><span class='rparen'>)</span>
+</span><span class='const'><span class='object_link'><a href="SObjectModel.html" title="SObjectModel (module)">SObjectModel</a></span></span><span class='period'>.</span><span class='id identifier rubyid_connect'><span class='object_link'><a href="SObjectModel.html#connect-class_method" title="SObjectModel.connect (method)">connect</a></span></span><span class='lparen'>(</span><span class='symbol'>:rest</span><span class='comma'>,</span> <span class='label'>instance_url:</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='label'>access_token:</span> <span class='id identifier rubyid_token'>token</span><span class='comma'>,</span> <span class='label'>api_version:</span> <span class='float'>62.0</span><span class='rparen'>)</span>
 
 <span class='comment'># generate Account, Contact and User sObject class
-</span><span class='const'><span class='object_link'><a href="Yamori.html" title="Yamori (module)">Yamori</a></span></span><span class='period'>.</span><span class='id identifier rubyid_generate'><span class='object_link'><a href="Yamori.html#generate-class_method" title="Yamori.generate (method)">generate</a></span></span> <span class='symbol'>:Account</span><span class='comma'>,</span> <span class='symbol'>:Contact</span><span class='comma'>,</span> <span class='symbol'>:User</span>
+</span><span class='const'><span class='object_link'><a href="SObjectModel.html" title="SObjectModel (module)">SObjectModel</a></span></span><span class='period'>.</span><span class='id identifier rubyid_generate'><span class='object_link'><a href="SObjectModel.html#generate-class_method" title="SObjectModel.generate (method)">generate</a></span></span> <span class='symbol'>:Account</span><span class='comma'>,</span> <span class='symbol'>:Contact</span><span class='comma'>,</span> <span class='symbol'>:User</span>
 </code></pre>
 
 <h3 id="label-What+is+instance+url-3F">What is instance url?</h3>
@@ -206,15 +206,59 @@ Instance Url     https://hoge-abc-ed.example.my.salesforce.com
 <p>Sometimes it’s better to use raw SOQL when it gets complecated.</p>
 
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_accounts'>accounts</span> <span class='op'>=</span>
-  <span class='const'><span class='object_link'><a href="Yamori.html" title="Yamori (module)">Yamori</a></span></span><span class='period'>.</span><span class='id identifier rubyid_connection'><span class='object_link'><a href="Yamori.html#connection-class_method" title="Yamori.connection (method)">connection</a></span></span><span class='period'>.</span><span class='id identifier rubyid_exec_query'>exec_query</span><span class='lparen'>(</span>
+  <span class='const'><span class='object_link'><a href="SObjectModel.html" title="SObjectModel (module)">SObjectModel</a></span></span><span class='period'>.</span><span class='id identifier rubyid_connection'><span class='object_link'><a href="SObjectModel.html#connection-class_method" title="SObjectModel.connection (method)">connection</a></span></span><span class='period'>.</span><span class='id identifier rubyid_exec_query'>exec_query</span><span class='lparen'>(</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SELECT Id, Name FROM Account WHERE Name like &#39;%Hoge&#39; OR (Age &lt;= 30 AND BillingCity IN [&#39;Tokyo&#39;, &#39;NewYork&#39;])</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
     <span class='label'>model_class:</span> <span class='const'>Account</span>
   <span class='rparen'>)</span>
 </code></pre>
+
+<h2 id="label-Known+Issues">Known Issues</h2>
+
+<h3 id="label-exec_query">exec_query</h3>
+
+<p>SELECT clause missing Id causes model class to force insert a record, not update</p>
+
+<pre class="code ruby"><code class="ruby">irb(main):006&gt; rows = SObjectModel.connection.exec_query &quot;SELECT Name FROM Account LIMIT 1&quot;, model_class: Account
+=&gt;
+[#&lt;Account:0x0000724bada70970
+...
+irb(main):007&gt; rows.first
+=&gt;
+#&lt;Account:0x0000724bada70970
+  @Name=&quot;Express Logistics and Transport2&quot;,
+  @current_attributes={:Name=&gt;&quot;Express Logistics and Transport2&quot;},
+  @original_attributes={:Name=&gt;&quot;Express Logistics and Transport2&quot;},
+  @updated_attributes={:Name=&gt;nil}&gt;
+
+ =&gt; rows.first.save  #=&gt; this does NEW RECORD INSERT, not Update because its Id is nil
+</code></pre>
+
+<h3 id="label-Child+relationship+in+SELECT+clause">Child relationship in SELECT clause</h3>
+
+<p>child relationsip that doesn’t specify Id  in SELECT clause causes model class to force insert a record, not update</p>
+
+<pre class="code ruby"><code class="ruby">irb(main):016&gt; acc = Account.select(:Name, &#39;(SELECT Name FROM Contacts)&#39;).where(Id: Contact.where.not(AccountId: nil).pluck(:AccountId)).take
+=&gt;
+#&lt;Account:0x0000724bae18f4b8
+...
+irb(main):017&gt; acc
+=&gt;
+#&lt;Account:0x0000724bae18f4b8
+ @Contacts=
+  [#&lt;Contact:0x0000724bacf411a8 @Name=&quot;Gonzalez Rose&quot;, @current_attributes={:Name=&gt;&quot;Gonzalez Rose&quot;}, @original_attributes={:Name=&gt;&quot;Gonzalez Rose&quot;}, @updated_attributes={:Name=&gt;nil}&gt;,
+   #&lt;Contact:0x0000724bae18f468 @Name=&quot;Forbes Sean&quot;, @current_attributes={:Name=&gt;&quot;Forbes Sean&quot;}, @original_attributes={:Name=&gt;&quot;Forbes Sean&quot;}, @updated_attributes={:Name=&gt;nil}&gt;],
+ @Id=&quot;0015j00001U2XvEAAV&quot;,
+ @Name=&quot;Edge Communications&quot;,
+ @current_attributes={:Name=&gt;&quot;Edge Communications&quot;},
+ @original_attributes={:Name=&gt;&quot;Edge Communications&quot;, :Id=&gt;&quot;0015j00001U2XvEAAV&quot;},
+ @updated_attributes={:Name=&gt;nil}&gt;
+
+irb(main):018&gt; acc.Contacts.first.save #=&gt; this does NEW RECORD INSERT, not Update because its Id is nil
+</code></pre>
 </div></div>
 
       <div id="footer">
-  Generated on Mon Nov  4 00:30:40 2024 by
+  Generated on Mon Nov  4 13:39:54 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.3.4).
 </div>

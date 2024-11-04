@@ -6,7 +6,7 @@ RSpec.shared_examples 'defining model DML methods' do
     let(:values) { {a: 100, b: 200} }
 
     before do
-      definition = Yamori::ClassDefinition.new(schema)
+      definition = SObjectModel::ClassDefinition.new(schema)
       ClassDefininitionTest4 = instance_eval(definition.to_s)
       ClassDefininitionTest4.connection = connection
     end
@@ -21,7 +21,7 @@ RSpec.shared_examples 'defining model DML methods' do
 
   describe '#save' do
     it "save a new record" do
-      definition = Yamori::ClassDefinition.new(schema)
+      definition = SObjectModel::ClassDefinition.new(schema)
       ClassDefininitionTest6 = instance_eval(definition.to_s)
       ClassDefininitionTest6.connection = connection
 
@@ -35,7 +35,7 @@ RSpec.shared_examples 'defining model DML methods' do
     end
 
     it "update a record, which already exists" do
-      definition = Yamori::ClassDefinition.new(schema)
+      definition = SObjectModel::ClassDefinition.new(schema)
       ClassDefininitionTest7 = instance_eval(definition.to_s)
       ClassDefininitionTest7.connection = connection
 
@@ -51,7 +51,7 @@ RSpec.shared_examples 'defining model DML methods' do
 
   describe '#delete' do
     it "delete a record" do
-      definition = Yamori::ClassDefinition.new(schema)
+      definition = SObjectModel::ClassDefinition.new(schema)
       ClassDefininitionTest8 = instance_eval(definition.to_s)
       ClassDefininitionTest8.connection = connection
 

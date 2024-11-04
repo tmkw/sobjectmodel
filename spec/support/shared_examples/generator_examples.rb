@@ -1,7 +1,7 @@
-require 'yamori/generator'
+require 'sobject_model/generator'
 
 RSpec.shared_examples 'Generator#generate' do
-  let(:generator) { Yamori::Generator.new(connection) }
+  let(:generator) { SObjectModel::Generator.new(connection) }
 
   before do
     allow(connection).to receive(:describe).with(object_name).and_return(schema)

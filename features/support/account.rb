@@ -2,7 +2,7 @@ module AccountHelper
   def account
     return @account unless @account.nil?
 
-    name = 'yamori:test account'
+    name = 'sobject_model:test account'
     if record_exist?(:Account, Name: name)
       sf.data.delete_record :Account, where: {Name: name}, target_org: target_org
     end

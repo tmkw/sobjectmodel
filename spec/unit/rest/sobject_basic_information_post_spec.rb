@@ -1,4 +1,4 @@
-module Yamori::Rest
+module SObjectModel::Rest
   RSpec.describe Client, :rest_request, type: :unit do
     describe '#create' do
       let(:id) { "001D000000IqhSLIAZ" }
