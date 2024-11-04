@@ -1,13 +1,13 @@
-RSpec.describe 'Yamori::Adapter::Rest' do
-  let(:client) { instance_double('Yamori::Rest::Client') }
-  let(:adapter) {Yamori::Adapter::Rest.new(client)}
+RSpec.describe 'SObjectModel::Adapter::Rest' do
+  let(:client) { instance_double('SObjectModel::Rest::Client') }
+  let(:adapter) {SObjectModel::Adapter::Rest.new(client)}
 
   let(:id) { anything }
   let(:object_type) { anything }
   let(:klass) { double('Model Class') }
   let(:model_instance) { anything }
   let(:soql) { 'SELECT Id, Name FROM Hoge__c' }
-  let(:query_result) { instance_double('Yamori::Rest::QueryResult') }
+  let(:query_result) { instance_double('SObjectModel::Rest::QueryResult') }
   let(:raw_records) { [{Name: 'hoge'}, {Name: 'bar'}] }
   let(:records) { [model_instance, model_instance] }
 

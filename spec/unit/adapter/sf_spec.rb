@@ -1,4 +1,4 @@
-module Yamori::Adapter
+module SObjectModel::Adapter
   RSpec.describe Sf do
     let(:org) { :dev }
     let(:sf) { double('sf_cli::Sf::Main') }
