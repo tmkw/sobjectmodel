@@ -41,7 +41,7 @@ irb(main):018> acc.Contacts.first.save #=> this does NEW RECORD INSERT, not Upda
 
 ## 0.1.4 - 2024-11-18
 - FIX: Exception message of rest client was wrong
-- NEW: SObject.generated_classes to identify classes that have benn already created
+- NEW: SObjectModel.generated_classes to identify classes that have benn already created
 
 ## 0.1.3 - 2024-11-04
 - New: now rest client supports [describe global](https://developer.salesforce.com/docs/atlas.ja-jp.api_rest.meta/api_rest/resources_describeGlobal.htm)
