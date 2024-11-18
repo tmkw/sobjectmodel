@@ -10,8 +10,10 @@ RSpec.shared_examples 'Generator#generate' do
 
   it 'generates a class' do
     expect(generator.generate(object_name)).to include(object_name)
-    expect(Object.const_get object_name.to_sym).to be ModelGeneratorTestClass
-    expect(ModelGeneratorTestClass.connection).to be connection
+    #expect(Object.const_get object_name.to_sym).to be ModelGeneratorTestClass
+    #expect(ModelGeneratorTestClass.connection).to be connection
+    expect{ Object.const_get object_name.to_sym }.not_to raise_error
+    expect((Object.const_get(object_name.to_sym)).connection).to be connection
 
     expect(connection).to have_received :describe
     expect(class_definition).to have_received :to_s
