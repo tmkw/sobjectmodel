@@ -32,7 +32,7 @@ module SObjectModel::Rest
         let(:response) { %|[{"fields" : [ "Id" ], "message" : "Account ID: id value of incorrect type: 001900K0001pPuOAAU", "errorCode" : "MALFORMED_ID"}]| }
 
         it 'raises an error' do
-          expect{ http.get(path) }.to raise_error(RequestError)
+          expect{ http.get(path) }.to raise_error(RequestError, /\[MALFORMED_ID\] Account ID: id value of incorrect type: 001900K0001pPuOAAU/)
         end
       end
     end

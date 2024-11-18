@@ -12,7 +12,7 @@ module SObjectModel
       end
 
       def to_s
-        %|[#{@code}] #{@msg}|
+        %|[#{@error_code}] #{@error_message}|
       end
     end
   end
