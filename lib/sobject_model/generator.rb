@@ -1,3 +1,4 @@
+require_relative '../sobject_model'
 require_relative './class_definition'
 
 module SObjectModel
@@ -23,6 +24,7 @@ module SObjectModel
         instance_eval "::#{object_type} = #{class_definition}"
         klass = Object.const_get object_type.to_sym
         klass.connection = connection
+        SObjectModel.generated_classes << klass
         generated_types << object_type
       end
 

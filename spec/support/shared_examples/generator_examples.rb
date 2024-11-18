@@ -10,8 +10,6 @@ RSpec.shared_examples 'Generator#generate' do
 
   it 'generates a class' do
     expect(generator.generate(object_name)).to include(object_name)
-    #expect(Object.const_get object_name.to_sym).to be ModelGeneratorTestClass
-    #expect(ModelGeneratorTestClass.connection).to be connection
     expect{ Object.const_get object_name.to_sym }.not_to raise_error
     expect((Object.const_get(object_name.to_sym)).connection).to be connection
 
@@ -22,4 +20,8 @@ RSpec.shared_examples 'Generator#generate' do
   it "doesn't generate class that aliready exists" do
     expect(generator.generate(object_name)).to be_empty
   end
+
+    it "tracks all generated classes" do
+      expect(SObjectModel.generated_classes).to include Object.const_get(object_name.to_sym)
+    end
 end
