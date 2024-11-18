@@ -21,6 +21,9 @@ Bundler::
   # generate Account, Contact and User sObject class
   SObjectModel.generate :Account, :Contact, :User
 
+  # identify all generated classes
+  SObjectModel.generated_classes #=> [Account, Contact, User]
+
 === What is instance url?
 In short, it's Salesforce host url.
 You can check it by Salesforce CLI:
@@ -142,3 +145,25 @@ child relationsip that doesn't specify Id  in SELECT clause causes model class t
    @updated_attributes={:Name=>nil}>
 
   irb(main):018> acc.Contacts.first.save #=> this does NEW RECORD INSERT, not Update because its Id is nil
+
+== Development Note
+\1. To develop, install libraries at first.
+  $ bundle install
+\2. This project adopts TDD (Test Driven Development)
+  # rspec
+  $ bundle install rspec
+
+  # cucumber
+  $ SF_TARGET_ORG=your_target_org bundle exec cucumber
+\3. For debug, use IRB
+  $ bundle exec rake irb[your_target_org]
+  > gen :Account, :Contact  #=> shortcut to generate classes
+
+The word "target org" is a technical term of Salesforce CLI.
+It means the alias of Salesforce org. You can check it like bellow:
+  $ sf org list
+  Type   Alias      Username                          Org ID             Status    Expires
+  ------------------------------------------------------------------------------------------
+  DevHub dev        hoge@example.sandbox              00D5j00000DiuxmEAB Connected
+         trailhead  hoge@resourceful-hoge-bar-baz.com 00DIS000002BinI2AS Connected
+See also {https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_org_commands_unified.htm#cli_reference_org_list_unified the command reference}.
