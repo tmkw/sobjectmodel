@@ -93,7 +93,10 @@
 
 <span class='comment'># generate Account, Contact and User sObject class
 </span><span class='const'><span class='object_link'><a href="SObjectModel.html" title="SObjectModel (module)">SObjectModel</a></span></span><span class='period'>.</span><span class='id identifier rubyid_generate'><span class='object_link'><a href="SObjectModel.html#generate-class_method" title="SObjectModel.generate (method)">generate</a></span></span> <span class='symbol'>:Account</span><span class='comma'>,</span> <span class='symbol'>:Contact</span><span class='comma'>,</span> <span class='symbol'>:User</span>
-</code></pre>
+
+<span class='comment'># identify all generated classes
+</span><span class='const'><span class='object_link'><a href="SObjectModel.html" title="SObjectModel (module)">SObjectModel</a></span></span><span class='period'>.</span><span class='id identifier rubyid_generated_classes'><span class='object_link'><a href="SObjectModel.html#generated_classes-class_method" title="SObjectModel.generated_classes (method)">generated_classes</a></span></span> <span class='comment'>#=&gt; [Account, Contact, User]
+</span></code></pre>
 
 <h3 id="label-What+is+instance+url-3F">What is instance url?</h3>
 
@@ -255,10 +258,43 @@ irb(main):017&gt; acc
 
 irb(main):018&gt; acc.Contacts.first.save #=&gt; this does NEW RECORD INSERT, not Update because its Id is nil
 </code></pre>
+
+<h2 id="label-Development+Note">Development Note</h2>
+
+<p>1. To develop, install libraries at first.</p>
+
+<pre class="code ruby"><code class="ruby">$ bundle install
+</code></pre>
+
+<p>2. This project adopts TDD (Test Driven Development)</p>
+
+<pre class="code ruby"><code class="ruby"># rspec
+$ bundle install rspec
+
+# cucumber
+$ SF_TARGET_ORG=your_target_org bundle exec cucumber
+</code></pre>
+
+<p>3. For debug, use IRB</p>
+
+<pre class="code ruby"><code class="ruby">$ bundle exec rake irb[your_target_org]
+&gt; gen :Account, :Contact  #=&gt; shortcut to generate classes
+</code></pre>
+
+<p>The word “target org” is a technical term of Salesforce CLI. It means the alias of Salesforce org. You can check it like bellow:</p>
+
+<pre class="code ruby"><code class="ruby">$ sf org list
+Type   Alias      Username                          Org ID             Status    Expires
+------------------------------------------------------------------------------------------
+DevHub dev        hoge@example.sandbox              00D5j00000DiuxmEAB Connected
+       trailhead  hoge@resourceful-hoge-bar-baz.com 00DIS000002BinI2AS Connected
+</code></pre>
+
+<p>See also <a href="https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_org_commands_unified.htm#cli_reference_org_list_unified" target="_parent" title="the command reference">the command reference</a>.</p>
 </div></div>
 
       <div id="footer">
-  Generated on Mon Nov  4 22:51:38 2024 by
+  Generated on Mon Nov 18 21:35:54 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.3.4).
 </div>
