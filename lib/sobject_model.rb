@@ -18,6 +18,10 @@ module SObjectModel
     @connection
   end
 
+  def self.generated_classes
+    @generated_classes ||= []
+  end
+
   def self.connection=(connector)
     @connection = connector
   end
